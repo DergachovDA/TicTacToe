@@ -31,12 +31,12 @@ public class Main {
                     playerO = new Human('O');
                     board = new Board(playerX, playerO);
 
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            new MainForm(board);
-                        }
-                    });
+//                    SwingUtilities.invokeLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            new MainForm(board);
+//                        }
+//                    });
 
                     System.out.println("Game started...");
                     game(board);
