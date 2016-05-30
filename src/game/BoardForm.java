@@ -16,8 +16,10 @@ public class BoardForm extends JPanel {
     private JButton button31;
     private JButton button32;
     private JButton button33;
+    private Board board;
 
     BoardForm(Board board) {
+        this.board = board;
         Dimension dimension = new Dimension();
         dimension.width = 100;
         dimension.height = 100;
@@ -45,7 +47,27 @@ public class BoardForm extends JPanel {
 
         LayoutManager layoutManager = new GridBagLayout();
         setLayout(layoutManager);
+        GridBagConstraints gc = createGridBagConstraints();
 
+
+        button11.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                move(button11);
+            }
+        });
+
+    }
+
+    private void move(JButton button) {
+        if (!board.makeMove()) {
+            ("Input incorrect! Repeat your move.");
+        } else {
+            System.out.println(board);
+        }
+    }
+
+    private GridBagConstraints createGridBagConstraints() {
         GridBagConstraints gc = new GridBagConstraints();
         gc.gridx = 0;
         gc.gridy = 0;
@@ -83,13 +105,7 @@ public class BoardForm extends JPanel {
         gc.gridy = 2;
         add(button33, gc);
 
-        button11.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                button11.setText("X");
-            }
-        });
-
+        return gc;
     }
 
 }
