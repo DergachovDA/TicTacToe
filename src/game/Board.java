@@ -62,6 +62,19 @@ class Board {
         return true;
     }
 
+    boolean makeMove(String move) {
+        int x = Character.getNumericValue(move.charAt(0)) - 1;
+        int y = Character.getNumericValue(move.charAt(1)) - 1;
+
+        if (!isMoveValid(x, y))
+            return false;
+
+        board[x][y] = currentPlayer.getType();
+        countsMoves++;
+        changeCurrentPlayer();
+        return true;
+    }
+
     private void changeCurrentPlayer() {
         nextPlayer = currentPlayer;
         if (currentPlayer == playerX)

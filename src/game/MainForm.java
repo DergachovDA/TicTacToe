@@ -2,63 +2,57 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 public class MainForm extends JFrame{
 
-    private JLabel textLabel;
-    private JButton startGame;
-    Statistics statistics = Statistics.getInstance();
-    Player playerX;
-    Player playerO;
-    Board board;
-
+    private JTextArea textArea;
+    private JButton button;
+//    private JTextArea textArea2;
 
     public MainForm() {
-        super("Game");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        super("Basic Layouts");
 
-//        Toolkit toolkit = Toolkit.getDefaultToolkit();
-//        Dimension screen = toolkit.getScreenSize();
-//        int x = screen.width;
-//        int y = screen.height;
-        setSize(350, 300);
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension screen = toolkit.getScreenSize();
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        int x = screen.width;
+        int y = screen.height;
+        setSize((int)Math.round(x * 0.5), (int)Math.round(y * 0.6));
+
+        setLocationRelativeTo(null);
+        setVisible(true);
+
         LayoutManager layoutManager = new BorderLayout(5 ,5);
         setLayout(layoutManager);
 
-        startGame = new JButton("Start game");
-        textLabel = new JLabel();
+        textArea = new JTextArea();
+//        button = new JButton("Click Me");
 
-        startGame.setSize(50, 50);
-        textLabel.setSize(50, 300);
+        Dimension textAriaSize = textArea.getPreferredSize();
+        textAriaSize.width = 300;
+        textAriaSize.height = 100;
+        textArea.setPreferredSize(textAriaSize);
 
-        add(startGame, BorderLayout.NORTH);
+        List<JButton> buttonList = new ArrayList<>();
+        Toolbar toolbar = new Toolbar();
+        toolbar.setButtons(buttonList);
 
-        game();
-    }
+        Player playerX = new Human('X');
+        Player playerO = new Human('O');
+        Board board = new Board(playerX, playerO);
+        GridForm gridForm = new GridForm(board, buttonList);
+        gridForm.setTextArea(textArea);
 
-    private void game() {
-        startGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playerX = new Human('X');
-                playerO = new Human('O');
-                board = new Board(playerX, playerO);
-                textLabel.setText("Player " + board.getCurrentPlayer() + " move...");
-                add(textLabel, BorderLayout.NORTH);
-                remove(startGame);
-                add(new BoardForm(board), BorderLayout.SOUTH);
-            }
-        });
-    }
 
-    public void
 
-    public static void main(String[] args) {
-        MainForm app = new MainForm();
-        app.setVisible(true);
-//        app.pack();
+        add(toolbar, BorderLayout.NORTH);
+        add(gridForm, BorderLayout.WEST);
+        add(textArea, BorderLayout.EAST);
+
+
     }
 }

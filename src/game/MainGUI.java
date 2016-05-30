@@ -1,7 +1,15 @@
 package game;
 
-/**
- * Created by SilvER on 29.05.2016.
- */
+import javax.swing.*;
+
 public class MainGUI {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainForm();
+
+            }
+        });
+    }
 }
