@@ -41,7 +41,7 @@ public class Main {
                     System.out.println("Game started...");
                     game(board);
 
-                    System.out.println(board.getWinnerPlayer());
+                    System.out.println(board.getResultGame());
 
                     addNewStatistics(board, statistics);
                     break;
@@ -60,18 +60,18 @@ public class Main {
     }
 
     private static void addNewStatistics(Board board, Statistics statistics) {
-        if (board.calculateWinner() == null) {
+        if (board.getWinner() == null) {
             statistics.addResult(new GameResult(board.getCurrentPlayer(), GameResult.DRAW));
-            statistics.addResult(new GameResult(board.getNextPlayer(), GameResult.DRAW));
+            statistics.addResult(new GameResult(board.getAnotherPlayer(board.getCurrentPlayer()), GameResult.DRAW));
         } else {
-            statistics.addResult(new GameResult(board.calculateWinner(), GameResult.WIN));
-            statistics.addResult(new GameResult(board.calculateLoser(), GameResult.LOSS));
+            statistics.addResult(new GameResult(board.getWinner(), GameResult.WIN));
+            statistics.addResult(new GameResult(board.getLoser(), GameResult.LOSS));
         }
     }
 
     private static void game(Board board) {
         while (!board.gameFinished()) {
-            System.out.println("Player " + board.getCurrentPlayer() + " move...");
+            System.out.println("Player " + board.getNextPlayer() + " move...");
             System.out.println("Enter your move: ");
             if (!board.makeMove()) {
                 System.out.println("Input incorrect! Repeat your move.");

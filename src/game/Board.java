@@ -1,4 +1,5 @@
 package game;
+
 import java.util.Arrays;
 
 class Board {
@@ -7,8 +8,10 @@ class Board {
     private Player playerX;
     private Player playerO;
     private Player currentPlayer;
-    private Player nextPlayer;
+    //    private Player nextPlayer;
+    private Player winner;
     private int countsMoves;
+    private boolean start;
 
     Board(Player playerX, Player playerO) {
         for (int i = 0; i < 3; i++) {
@@ -17,52 +20,57 @@ class Board {
         this.playerX = playerX;
         this.playerO = playerO;
         currentPlayer = playerX;
-        nextPlayer = playerO;
+        countsMoves = 0;
+    }
+
+    public boolean getStart() {
+        return start;
+    }
+
+    public void setStart(boolean start) {
+        this.start = start;
+    }
+
+    public void clearBoard() {
+        for (int i = 0; i < 3; i++) {
+            Arrays.fill(board[i], ' ');
+        }
+        currentPlayer = playerX;
+        winner = null;
         countsMoves = 0;
     }
 
     boolean gameFinished() {
 
         if (countsMoves < 5) return false;
-        if (countsMoves == 9) return true;
 
-        char ch = nextPlayer.getType();
-
-        for (int i = 0; i < 3; i++) {
-            if (board[i][0] == ch && board[i][1] == ch && board[i][2] == ch)
-                return true;
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (board[0][i] == ch && board[1][i] == ch && board[2][i] == ch)
-                return true;
-        }
-
-        if (board[0][0] == ch && board[1][1] == ch && board[2][2] == ch)
-            return true;
-
-        if (board[2][0] == ch && board[1][1] == ch && board[0][2] == ch)
-            return true;
+        if (calculateWinner() != null) return true;
 
         return false;
     }
 
     boolean makeMove() {
-        String move = currentPlayer.makeMove();
-        if (move.length() != 2) return false;
+        String move = getAnotherPlayer(currentPlayer).makeMove();
+
+        if (move.length() != 2) {
+            return false;
+        }
+
         int x = Character.getNumericValue(move.charAt(0)) - 1;
         int y = Character.getNumericValue(move.charAt(1)) - 1;
 
-        if (!isMoveValid(x, y))
+        if (!isMoveValid(x, y)) {
             return false;
-
+        }
+        changeCurrentPlayer();
         board[x][y] = currentPlayer.getType();
         countsMoves++;
-        changeCurrentPlayer();
         return true;
     }
 
     boolean makeMove(String move) {
+        changeCurrentPlayer();
+
         int x = Character.getNumericValue(move.charAt(0)) - 1;
         int y = Character.getNumericValue(move.charAt(1)) - 1;
 
@@ -71,16 +79,12 @@ class Board {
 
         board[x][y] = currentPlayer.getType();
         countsMoves++;
-        changeCurrentPlayer();
+
         return true;
     }
 
     private void changeCurrentPlayer() {
-        nextPlayer = currentPlayer;
-        if (currentPlayer == playerX)
-            currentPlayer = playerO;
-        else
-            currentPlayer = playerX;
+        currentPlayer = getAnotherPlayer(currentPlayer);
     }
 
     Player getCurrentPlayer() {
@@ -88,29 +92,56 @@ class Board {
     }
 
     Player getNextPlayer() {
-        return nextPlayer;
+        return getAnotherPlayer(currentPlayer);
     }
 
-    String getWinnerPlayer() {
-        if (countsMoves == 9) {
+    Player getAnotherPlayer(Player player) {
+        if (player == playerX)
+            player = playerO;
+        else
+            player = playerX;
+        return player;
+    }
+
+    String getResultGame() {
+        if (winner == null) {
             return "The winner is not defined";
         } else {
-            return "The winner is " + nextPlayer;
+            return "The winner is " + winner;
         }
     }
 
     public Player calculateWinner() {
-        if (countsMoves == 9) {
-            return null;
+        char type = currentPlayer.getType();
+
+        for (int i = 0; i < 3; i++) {
+            if (board[i][0] == type && board[i][1] == type && board[i][2] == type)
+                winner = currentPlayer;
         }
-        return nextPlayer;
+
+        for (int i = 0; i < 3; i++) {
+            if (board[0][i] == type && board[1][i] == type && board[2][i] == type)
+                winner = currentPlayer;
+        }
+
+        if (board[0][0] == type && board[1][1] == type && board[2][2] == type)
+            winner = currentPlayer;
+
+        if (board[2][0] == type && board[1][1] == type && board[0][2] == type)
+            winner = currentPlayer;
+
+        return winner;
     }
 
-    public Player calculateLoser() {
-        if (countsMoves == 9) {
+    public Player getLoser() {
+        if (winner == null) {
             return null;
         }
-        return currentPlayer;
+        return (winner == playerX) ? playerO : playerX;
+    }
+
+    public Player getWinner() {
+        return winner;
     }
 
 
