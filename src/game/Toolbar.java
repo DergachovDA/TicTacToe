@@ -28,7 +28,6 @@ public class Toolbar extends JPanel {
                 }
                 board.clearBoard();
                 board.setStart(true);
-                System.out.println(board);
             }
         });
     }

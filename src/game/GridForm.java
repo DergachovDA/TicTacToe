@@ -59,8 +59,6 @@ public class GridForm extends JPanel {
                             JOptionPane.showMessageDialog(null, board.getResultGame());
                         }
 
-                        System.out.println(board);
-                        textArea.setText(board.toString());
                     }
                 });
 

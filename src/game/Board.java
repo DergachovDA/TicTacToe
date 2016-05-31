@@ -41,11 +41,9 @@ class Board {
     }
 
     boolean gameFinished() {
-
         if (countsMoves < 5) return false;
-
         if (calculateWinner() != null) return true;
-
+        if (countsMoves == 9) return true;
         return false;
     }
 

@@ -1,6 +1,5 @@
 package game;
 
-import javax.swing.*;
 import java.util.Scanner;
 
 public class Main {
@@ -30,13 +29,6 @@ public class Main {
                     playerX = new Human('X');
                     playerO = new Human('O');
                     board = new Board(playerX, playerO);
-
-//                    SwingUtilities.invokeLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            new MainForm(board);
-//                        }
-//                    });
 
                     System.out.println("Game started...");
                     game(board);
