@@ -8,6 +8,7 @@ import java.util.List;
 public class MainForm extends JFrame{
 
     private JTextArea textArea;
+    private JLabel label;
     private Player playerX;
     private Player playerO;
     private Board board;
@@ -15,14 +16,15 @@ public class MainForm extends JFrame{
     public MainForm() {
         super("Game");
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screen = toolkit.getScreenSize();
-
+        Statistics statistics = Statistics.getInstance();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        int x = screen.width;
-        int y = screen.height;
-        setSize((int)Math.round(x * 0.5), (int)Math.round(y * 0.6));
+//        Toolkit toolkit = Toolkit.getDefaultToolkit();
+//        Dimension screen = toolkit.getScreenSize();
+//        int x = screen.width;
+//        int y = screen.height;
+//        setSize((int)Math.round(x * 0.5), (int)Math.round(y * 0.7));
+        setSize(900, 600);
 
         setLocationRelativeTo(null);
         setVisible(true);
@@ -42,14 +44,16 @@ public class MainForm extends JFrame{
         Board board = new Board(playerX, playerO);
         List<JButton> buttonList = new ArrayList<>();
 
-        Toolbar toolbar = new Toolbar(board);
+        Toolbar toolbar = new Toolbar(board, statistics);
         toolbar.setButtons(buttonList);
+        toolbar.setTextArea(textArea);
 
-        GridForm gridForm = new GridForm(board, buttonList);
+        GridForm gridForm = new GridForm(board, buttonList, statistics);
         gridForm.setTextArea(textArea);
 
 
         add(toolbar, BorderLayout.NORTH);
+//        add(label, BorderLayout.WEST);
         add(gridForm, BorderLayout.WEST);
         add(textArea, BorderLayout.EAST);
 

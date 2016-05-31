@@ -14,13 +14,13 @@ public class GridForm extends JPanel {
     private List<JButton> buttonList;
 
 
-    GridForm(Board board, List<JButton> buttonList) {
+    GridForm(Board board, List<JButton> buttonList, Statistics statistics) {
         this.board = board;
         this.buttonList = buttonList;
 
         Dimension dimension = new Dimension();
-        dimension.width = 100;
-        dimension.height = 100;
+        dimension.width = 150;
+        dimension.height = 150;
 
         LayoutManager layoutManager = new GridBagLayout();
         setLayout(layoutManager);
@@ -36,7 +36,7 @@ public class GridForm extends JPanel {
                 gc.gridy = i;
 
                 button.setName(Integer.toString(i + 1) + Integer.toString(j + 1));
-                button.setFont(new Font(null, Font.BOLD, 30));
+                button.setFont(new Font(null, Font.BOLD, 72));
                 add(button, gc);
 
                 button.addActionListener(new ActionListener() {
@@ -56,9 +56,9 @@ public class GridForm extends JPanel {
 
                         if (board.gameFinished()) {
                             board.setStart(false);
+                            addNewStatistics(board, statistics);
                             JOptionPane.showMessageDialog(null, board.getResultGame());
                         }
-
                     }
                 });
 
@@ -69,5 +69,15 @@ public class GridForm extends JPanel {
 
     public void setTextArea(JTextArea textArea) {
         this.textArea = textArea;
+    }
+
+    private static void addNewStatistics(Board board, Statistics statistics) {
+        if (board.getWinner() == null) {
+            statistics.addResult(new GameResult(board.getCurrentPlayer(), GameResult.DRAW));
+            statistics.addResult(new GameResult(board.getAnotherPlayer(board.getCurrentPlayer()), GameResult.DRAW));
+        } else {
+            statistics.addResult(new GameResult(board.getWinner(), GameResult.WIN));
+            statistics.addResult(new GameResult(board.getLoser(), GameResult.LOSS));
+        }
     }
 }
