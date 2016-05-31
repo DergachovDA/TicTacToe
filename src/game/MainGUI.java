@@ -8,7 +8,6 @@ public class MainGUI {
             @Override
             public void run() {
                 new MainForm();
-
             }
         });
     }

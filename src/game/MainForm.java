@@ -8,11 +8,12 @@ import java.util.List;
 public class MainForm extends JFrame{
 
     private JTextArea textArea;
-    private JButton button;
-//    private JTextArea textArea2;
+    private Player playerX;
+    private Player playerO;
+    private Board board;
 
     public MainForm() {
-        super("Basic Layouts");
+        super("Game");
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension screen = toolkit.getScreenSize();
@@ -30,23 +31,22 @@ public class MainForm extends JFrame{
         setLayout(layoutManager);
 
         textArea = new JTextArea();
-//        button = new JButton("Click Me");
 
         Dimension textAriaSize = textArea.getPreferredSize();
         textAriaSize.width = 300;
         textAriaSize.height = 100;
         textArea.setPreferredSize(textAriaSize);
 
-        List<JButton> buttonList = new ArrayList<>();
-        Toolbar toolbar = new Toolbar();
-        toolbar.setButtons(buttonList);
-
         Player playerX = new Human('X');
         Player playerO = new Human('O');
         Board board = new Board(playerX, playerO);
+        List<JButton> buttonList = new ArrayList<>();
+
+        Toolbar toolbar = new Toolbar(board);
+        toolbar.setButtons(buttonList);
+
         GridForm gridForm = new GridForm(board, buttonList);
         gridForm.setTextArea(textArea);
-
 
 
         add(toolbar, BorderLayout.NORTH);

@@ -11,13 +11,11 @@ public class GridForm extends JPanel {
 
     private Board board;
     private JTextArea textArea;
-    private boolean start;
     private List<JButton> buttonList;
 
 
     GridForm(Board board, List<JButton> buttonList) {
         this.board = board;
-        start = false;
         this.buttonList = buttonList;
 
         Dimension dimension = new Dimension();
@@ -34,41 +32,41 @@ public class GridForm extends JPanel {
 
                 button.setPreferredSize(dimension);
 
-                gc.gridx = i;
-                gc.gridy = j;
+                gc.gridx = j;
+                gc.gridy = i;
 
                 button.setName(Integer.toString(i + 1) + Integer.toString(j + 1));
-
+                button.setFont(new Font(null, Font.BOLD, 30));
                 add(button, gc);
 
                 button.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        if (!start) return;
+                        if (!board.getStart()) return;
 
                         JButton btn = (JButton) e.getSource();
                         String move = btn.getName();
 
                         if (board.makeMove(move)) {
-                            Player player = board.getNextPlayer();
+                            Player player = board.getCurrentPlayer();
                             char type = player.getType();
                             btn.setText(String.valueOf(type));
                         }
 
                         if (board.gameFinished()) {
-                            JOptionPane.showMessageDialog(null, board.getWinnerPlayer());
+                            board.setStart(false);
+                            JOptionPane.showMessageDialog(null, board.getResultGame());
                         }
+
+                        System.out.println(board);
+                        textArea.setText(board.toString());
                     }
                 });
 
                 buttonList.add(button);
             }
         }
-    }
-
-    public void setStart(boolean start) {
-        this.start = start;
     }
 
     public void setTextArea(JTextArea textArea) {

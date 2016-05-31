@@ -9,33 +9,35 @@ import java.util.List;
 public class Toolbar extends JPanel {
 
     private List<JButton> buttonList;
-    private JButton buttonStart = new JButton("Start");
-//    private JButton buttonGoodbye = new JButton("Goodbye");
+//    private Boolean start;
+    private JButton buttonStart = new JButton("Start a new game");
+    private Board board;
 
-    public Toolbar() {
+    public Toolbar(Board board) {
+        this.board = board;
         LayoutManager flowLayout = new FlowLayout();
-
         setLayout(flowLayout);
 
         add(buttonStart, flowLayout);
-//        add(buttonGoodbye, flowLayout);
 
         buttonStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                for (JButton button : buttonList) {
+                    button.setText("");
+                }
+                board.clearBoard();
+                board.setStart(true);
+                System.out.println(board);
             }
         });
     }
-//        buttonGoodbye.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                JOptionPane.showMessageDialog(null, "Goodbye!");
-//            }
-//        });
 
     public void setButtons(List<JButton> buttonList) {
         this.buttonList = buttonList;
     }
 
+//    public void setStart(Boolean start) {
+//        this.start = start;
+//    }
 }
