@@ -14,7 +14,7 @@ public class GridForm extends JPanel {
     private List<JButton> buttonList;
 
 
-    GridForm(Board board, List<JButton> buttonList, Statistics statistics) {
+    GridForm(Board board, List<JButton> buttonList, Statistics statistics, JLabel label) {
         this.board = board;
         this.buttonList = buttonList;
 
@@ -52,12 +52,17 @@ public class GridForm extends JPanel {
                             Player player = board.getCurrentPlayer();
                             char type = player.getType();
                             btn.setText(String.valueOf(type));
+                        } else {
+                            label.setText("Input incorrect! Repeat your move.");
                         }
 
                         if (board.gameFinished()) {
                             board.setStart(false);
                             addNewStatistics(board, statistics);
+                            label.setText(board.getResultGame());
                             JOptionPane.showMessageDialog(null, board.getResultGame());
+                        } else {
+                            label.setText("Player " + board.getNextPlayer() + " move...");
                         }
                     }
                 });

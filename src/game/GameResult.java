@@ -42,7 +42,7 @@ public class GameResult {
 
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        return player + "\t| " + result + "\t| " + dateFormat.format(date);
+        return player + "\t" + result + "\t" + dateFormat.format(date);
     }
 
 

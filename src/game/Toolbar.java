@@ -13,19 +13,21 @@ public class Toolbar extends JPanel {
     private JTextArea textArea;
 
     private JButton buttonStart = new JButton("New game");
-    private JButton buttonStatAll = new JButton("All results");
-    private JButton buttonStatWin = new JButton("All winers");
-    private JButton buttonStatLoss = new JButton("All losses");
-    private JButton buttonStatYear = new JButton("Results for the year");
-    private JButton buttonStatMonth = new JButton("Results for the month");
-    private JButton buttonStatDay = new JButton("Results for the day");
+    private JLabel labelStat = new JLabel("    Results:");
+    private JButton buttonStatAll = new JButton("all");
+    private JButton buttonStatWin = new JButton("winers");
+    private JButton buttonStatLoss = new JButton("losses");
+    private JButton buttonStatYear = new JButton("year");
+    private JButton buttonStatMonth = new JButton("month");
+    private JButton buttonStatDay = new JButton("day");
 
-    public Toolbar(Board board, Statistics statistics) {
+    public Toolbar(Board board, Statistics statistics, JLabel label) {
         this.board = board;
         LayoutManager flowLayout = new FlowLayout();
         setLayout(flowLayout);
 
         add(buttonStart, flowLayout);
+        add(labelStat, flowLayout);
         add(buttonStatAll, flowLayout);
         add(buttonStatWin, flowLayout);
         add(buttonStatLoss, flowLayout);
@@ -41,6 +43,7 @@ public class Toolbar extends JPanel {
                 }
                 board.clearBoard();
                 board.setStart(true);
+                label.setText("Player " + board.getNextPlayer() + " move...");
             }
         });
 

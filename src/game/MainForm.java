@@ -9,6 +9,7 @@ public class MainForm extends JFrame{
 
     private JTextArea textArea;
     private JLabel label;
+
     private Player playerX;
     private Player playerO;
     private Board board;
@@ -33,6 +34,8 @@ public class MainForm extends JFrame{
         setLayout(layoutManager);
 
         textArea = new JTextArea();
+        label = new JLabel("Press \"New game\"...");
+
 
         Dimension textAriaSize = textArea.getPreferredSize();
         textAriaSize.width = 300;
@@ -44,18 +47,18 @@ public class MainForm extends JFrame{
         Board board = new Board(playerX, playerO);
         List<JButton> buttonList = new ArrayList<>();
 
-        Toolbar toolbar = new Toolbar(board, statistics);
+        Toolbar toolbar = new Toolbar(board, statistics, label);
         toolbar.setButtons(buttonList);
         toolbar.setTextArea(textArea);
 
-        GridForm gridForm = new GridForm(board, buttonList, statistics);
+        GridForm gridForm = new GridForm(board, buttonList, statistics, label);
         gridForm.setTextArea(textArea);
 
 
         add(toolbar, BorderLayout.NORTH);
-//        add(label, BorderLayout.WEST);
         add(gridForm, BorderLayout.WEST);
         add(textArea, BorderLayout.EAST);
+        add(label, BorderLayout.SOUTH);
 
 
     }
