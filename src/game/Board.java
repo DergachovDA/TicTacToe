@@ -8,7 +8,6 @@ class Board {
     private Player playerX;
     private Player playerO;
     private Player currentPlayer;
-    //    private Player nextPlayer;
     private Player winner;
     private int countsMoves;
     private boolean start;

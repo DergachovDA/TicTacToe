@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
 
 public class GridForm extends JPanel {
@@ -43,7 +42,10 @@ public class GridForm extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
 
-                        if (!board.getStart()) return;
+                        if (!board.getStart()) {
+                            JOptionPane.showMessageDialog(null, "First press \"New game\"");
+                            return;
+                        }
 
                         JButton btn = (JButton) e.getSource();
                         String move = btn.getName();
