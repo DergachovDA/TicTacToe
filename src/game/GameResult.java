@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GameResult {
+public class GameResult implements Comparable{
 
     public static final String WIN = "win";
     public static final String LOSS = "loss";
@@ -46,4 +46,9 @@ public class GameResult {
     }
 
 
+    @Override
+    public int compareTo(Object o) {
+        GameResult gameResult = (GameResult) o;
+        return this.player.compareTo(gameResult.player);
+    }
 }

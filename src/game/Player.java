@@ -1,12 +1,14 @@
 package game;
 
-public abstract class Player {
+public abstract class Player implements Comparable {
 
     private String lastname;
     private String firstname;
     private String middlename;
     private int age;
     private char type;
+    public static char X = 'X';
+    public static char O = 'O';
 
     public Player(String lastname, String firstname, String middlename, int age, char type) {
         this.lastname = lastname;
@@ -35,6 +37,12 @@ public abstract class Player {
                             return true;
 
         return false;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Player player = (Player) o;
+        return this.firstname.compareTo(player.firstname);
     }
 
     public char getType() {

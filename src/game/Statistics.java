@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class Statistics {
 
     public void addResult(GameResult result) {
         this.results.add(result);
+        sortByFirstnamePlayer();
     }
 
     public Statistics getAllWins() {
@@ -78,6 +80,10 @@ public class Statistics {
         return statisticsForYear;
     }
 
+
+    public void sortByFirstnamePlayer() {
+        Collections.sort(results);
+    }
 
     public String toString() {
         String out = "";

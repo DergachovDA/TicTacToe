@@ -42,8 +42,8 @@ public class MainForm extends JFrame {
         textAriaSize.height = 100;
         textArea.setPreferredSize(textAriaSize);
 
-        Player playerX = new Human('X');
-        Player playerO = new Human('O');
+        Player playerX = new Human("Ivan", Player.X);
+        Player playerO = new Human("Anton", Player.O);
         Board board = new Board(playerX, playerO);
         List<JButton> buttonList = new ArrayList<>();
 
