@@ -20,6 +20,10 @@ public class Toolbar extends JPanel {
     private JButton buttonStatYear = new JButton("year");
     private JButton buttonStatMonth = new JButton("month");
     private JButton buttonStatDay = new JButton("day");
+    private JLabel labelSort = new JLabel(" Sort:");
+    private JButton buttonSortByName = new JButton("by name");
+    private JButton buttonSortByWin = new JButton("by win");
+    private JButton buttonSortByLoss = new JButton("by loss");
 
     public Toolbar(Board board, Statistics statistics, JLabel label) {
         this.board = board;
@@ -34,6 +38,10 @@ public class Toolbar extends JPanel {
         add(buttonStatYear, flowLayout);
         add(buttonStatMonth, flowLayout);
         add(buttonStatDay, flowLayout);
+        add(labelSort, flowLayout);
+        add(buttonSortByName, flowLayout);
+        add(buttonSortByWin, flowLayout);
+        add(buttonSortByLoss, flowLayout);
 
         buttonStart.addActionListener(new ActionListener() {
             @Override
@@ -86,6 +94,30 @@ public class Toolbar extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 textArea.setText(statistics.getForDay().toString());
+            }
+        });
+
+        buttonSortByName.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                statistics.sortByFirstnamePlayer();
+                textArea.setText(statistics.toString());
+            }
+        });
+
+        buttonSortByWin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                statistics.sortByWin();
+                textArea.setText(statistics.toString());
+            }
+        });
+
+        buttonSortByLoss.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                statistics.sortByLoss();
+                textArea.setText(statistics.toString());
             }
         });
     }

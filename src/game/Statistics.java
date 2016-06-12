@@ -1,9 +1,6 @@
 package game;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Statistics {
 
@@ -21,7 +18,6 @@ public class Statistics {
 
     public void addResult(GameResult result) {
         this.results.add(result);
-        sortByFirstnamePlayer();
     }
 
     public Statistics getAllWins() {
@@ -79,10 +75,83 @@ public class Statistics {
         }
         return statisticsForYear;
     }
-
-
+    
     public void sortByFirstnamePlayer() {
         Collections.sort(results);
+    }
+
+    public void sortByWin() {
+        Collections.sort(results, new Comparator<GameResult>() {
+            @Override
+            public int compare(GameResult gr1, GameResult gr2) {
+
+                if (gr1.equalsWin()) {
+                    if (gr2.equalsWin())
+                        return 0;
+                    if (gr2.equalsDraw())
+                        return -1;
+                    if (gr2.equalsLoss())
+                        return -1;
+                }
+
+                if (gr1.equalsDraw()) {
+                    if (gr2.equalsWin())
+                        return 1;
+                    if (gr2.equalsDraw())
+                        return 0;
+                    if (gr2.equalsLoss())
+                        return -1;
+                }
+
+                if (gr1.equalsLoss()) {
+                    if (gr2.equalsWin())
+                        return 1;
+                    if (gr2.equalsDraw())
+                        return 1;
+                    if (gr2.equalsLoss())
+                        return 0;
+                }
+
+                return 0;
+            }
+        });
+    }
+
+    public void sortByLoss() {
+        Collections.sort(results, new Comparator<GameResult>() {
+            @Override
+            public int compare(GameResult gr1, GameResult gr2) {
+
+                if (gr1.equalsWin()) {
+                    if (gr2.equalsWin())
+                        return 0;
+                    if (gr2.equalsDraw())
+                        return 1;
+                    if (gr2.equalsLoss())
+                        return 1;
+                }
+
+                if (gr1.equalsDraw()) {
+                    if (gr2.equalsWin())
+                        return -1;
+                    if (gr2.equalsDraw())
+                        return 0;
+                    if (gr2.equalsLoss())
+                        return 1;
+                }
+
+                if (gr1.equalsLoss()) {
+                    if (gr2.equalsWin())
+                        return -1;
+                    if (gr2.equalsDraw())
+                        return -1;
+                    if (gr2.equalsLoss())
+                        return 0;
+                }
+
+                return 0;
+            }
+        });
     }
 
     public String toString() {

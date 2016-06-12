@@ -40,6 +40,18 @@ public class GameResult implements Comparable{
         return this.date;
     }
 
+    public boolean equalsWin() {
+        return result.equals(WIN);
+    }
+
+    public boolean equalsLoss() {
+        return result.equals(LOSS);
+    }
+
+    public boolean equalsDraw() {
+        return result.equals(DRAW);
+    }
+
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return player + "\t" + result + "\t" + dateFormat.format(date);
