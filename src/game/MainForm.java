@@ -19,7 +19,7 @@ public class MainForm extends JFrame {
 
         Statistics statistics = Statistics.getInstance();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
+        setSize(950, 600);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -38,7 +38,7 @@ public class MainForm extends JFrame {
 
 
         Dimension textAriaSize = textArea.getPreferredSize();
-        textAriaSize.width = 300;
+        textAriaSize.width = 350;
         textAriaSize.height = 100;
         textArea.setPreferredSize(textAriaSize);
 
