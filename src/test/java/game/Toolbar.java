@@ -15,17 +15,17 @@ public class Toolbar extends JPanel {
     private JTextArea textArea;
 
     private JButton buttonStart = new JButton("New game");
-    private JLabel labelStat = new JLabel("    Results:");
+    private JLabel labelStat = new JLabel(" Results:");
     private JButton buttonStatAll = new JButton("all");
     private JButton buttonStatWin = new JButton("winers");
     private JButton buttonStatLoss = new JButton("losses");
     private JButton buttonStatYear = new JButton("year");
     private JButton buttonStatMonth = new JButton("month");
     private JButton buttonStatDay = new JButton("day");
-    private JLabel labelSort = new JLabel(" Sort:");
-    private JButton buttonSortByName = new JButton("by name");
-    private JButton buttonSortByWin = new JButton("by win");
-    private JButton buttonSortByLoss = new JButton("by loss");
+    private JLabel labelSort = new JLabel(" Sort by");
+    private JButton buttonSortByName = new JButton("name");
+    private JButton buttonSortByWin = new JButton("win");
+    private JButton buttonSortByLoss = new JButton("loss");
 
     public Toolbar(final Board board, final Statistics statistics, final JLabel label) {
         this.board = board;
