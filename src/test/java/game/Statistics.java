@@ -1,58 +1,26 @@
 package game;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.*;
 import java.util.*;
-import java.util.Date;
 
 public class Statistics {
 
     private List<GameResult> results = new ArrayList<GameResult>();
     private static Statistics instance;
 
-    private Statistics() throws IOException, SQLException {
-        Properties properties = loadProperties();
-        Connection connection = DriverManager.
-                getConnection(properties.getProperty("url"),
-                        properties.getProperty("username"),
-                        properties.getProperty("password"));
-
+    private Statistics() {
     }
 
-    public static Statistics getInstance() throws IOException, SQLException {
+    public static Statistics getInstance() {
         if (instance == null)
             instance = new Statistics();
         return instance;
     }
 
-    public Statistics getStatisticsFromDB(Connection connection) throws SQLException, IOException {
-        Statistics statistics = new Statistics();
-//        GameResult result = new GameResult();
-        String sql = "SELECT * FROM statistics";
-        Statement statement = connection.createStatement();
-        statement.execute(sql);
-
-        ResultSet resultSet = statement.getResultSet();
-
-        while (resultSet.next()) {
-            String str = "";
-            str += resultSet.getString("id") + ", ";
-            str += resultSet.getString("lastname") + ", ";
-            str += resultSet.getString("firstname") + ", ";
-            str += resultSet.getString("age");
-            System.out.println(str);
-        }
-
-        return statistics;
-    }
-
     public void addResult(GameResult result) {
-        System.out.println(result);
         this.results.add(result);
     }
 
-    public Statistics getAllWins() throws IOException, SQLException {
+    public Statistics getAllWins() {
         Statistics allWins = new Statistics();
         for (GameResult result : results) {
             if (result.getResult().equals(GameResult.WIN)) {
@@ -62,7 +30,7 @@ public class Statistics {
         return allWins;
     }
 
-    public Statistics getAllLosses() throws IOException, SQLException {
+    public Statistics getAllLosses() {
         Statistics allLosses = new Statistics();
         for (GameResult result : results) {
             if (result.getResult().equals(GameResult.LOSS)) {
@@ -72,7 +40,7 @@ public class Statistics {
         return allLosses;
     }
 
-    public Statistics getForYear() throws IOException, SQLException {
+    public Statistics getForYear() {
         Statistics statisticsForYear = new Statistics();
         Date currentDate = new Date();
         long yearAgo = currentDate.getTime() - 31536000000L;
@@ -84,7 +52,7 @@ public class Statistics {
         return statisticsForYear;
     }
 
-    public Statistics getForMonth() throws IOException, SQLException {
+    public Statistics getForMonth() {
         Statistics statisticsForYear = new Statistics();
         Date currentDate = new Date();
         long monthAgo = currentDate.getTime() - 2592000000L;
@@ -96,7 +64,7 @@ public class Statistics {
         return statisticsForYear;
     }
 
-    public Statistics getForDay() throws IOException, SQLException {
+    public Statistics getForDay() {
         Statistics statisticsForYear = new Statistics();
         Date currentDate = new Date();
         long dayAgo = currentDate.getTime() - 86400000L;
@@ -184,13 +152,6 @@ public class Statistics {
                 return 0;
             }
         });
-    }
-
-    private Properties loadProperties() throws IOException {
-        Properties properties = new Properties();
-        InputStream stream = getClass().getResourceAsStream("db.properties");
-        properties.load(stream);
-        return properties;
     }
 
     public String toString() {

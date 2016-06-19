@@ -1,14 +1,12 @@
 package game;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) {
 
-        char input = 's';
+        String input = "start";
         Scanner scanner = new Scanner(System.in);
         Statistics statistics = Statistics.getInstance();
         Player playerX;
@@ -18,15 +16,15 @@ public class Main {
         while (true) {
             switch (input) {
 
-                case 'h':
+                case "stat":
                     printStatistics(statistics);
                     break;
 
-                case 'e':
+                case "exit":
                     System.exit(0);
                     break;
 
-                case 's':
+                case "start":
 
                     playerX = new Human('X');
                     playerO = new Human('O');
@@ -43,7 +41,7 @@ public class Main {
 
             printHelp();
 
-            input = scanner.next().charAt(0);
+            input = scanner.next();
         }
     }
 
@@ -75,7 +73,7 @@ public class Main {
         }
     }
 
-    private static void printStatistics(Statistics statistics) throws IOException, SQLException {
+    private static void printStatistics(Statistics statistics) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the \"a\" to show all results");
@@ -85,28 +83,28 @@ public class Main {
         System.out.println("\t\t  \"m\" - results for the month");
         System.out.println("\t\t  \"d\" - results for the day.");
 
-        switch (scanner.next().charAt(0)) {
-            case 'a':
+        switch (scanner.next()) {
+            case "a":
                 System.out.println("All results:");
                 System.out.println(statistics);
                 break;
-            case 'w':
+            case "w":
                 System.out.println("All winers:");
                 System.out.println(statistics.getAllWins());
                 break;
-            case 'l':
+            case "l":
                 System.out.println("All losses:");
                 System.out.println(statistics.getAllLosses());
                 break;
-            case 'y':
+            case "y":
                 System.out.println("All results for the year:");
                 System.out.println(statistics.getForYear());
                 break;
-            case 'm':
+            case "m":
                 System.out.println("All results for the month:");
                 System.out.println(statistics.getForMonth());
                 break;
-            case 'd':
+            case "d":
                 System.out.println("All results for the day:");
                 System.out.println(statistics.getForDay());
                 break;
