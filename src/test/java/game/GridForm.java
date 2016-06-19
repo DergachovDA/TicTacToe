@@ -13,7 +13,7 @@ public class GridForm extends JPanel {
     private List<JButton> buttonList;
 
 
-    GridForm(Board board, List<JButton> buttonList, Statistics statistics, JLabel label) {
+    GridForm(final Board board, List<JButton> buttonList, final Statistics statistics, final JLabel label) {
         this.board = board;
         this.buttonList = buttonList;
 

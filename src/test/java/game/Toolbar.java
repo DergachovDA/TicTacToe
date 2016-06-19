@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Toolbar extends JPanel {
@@ -25,7 +27,7 @@ public class Toolbar extends JPanel {
     private JButton buttonSortByWin = new JButton("by win");
     private JButton buttonSortByLoss = new JButton("by loss");
 
-    public Toolbar(Board board, Statistics statistics, JLabel label) {
+    public Toolbar(final Board board, final Statistics statistics, final JLabel label) {
         this.board = board;
         LayoutManager flowLayout = new FlowLayout();
         setLayout(flowLayout);
@@ -65,35 +67,65 @@ public class Toolbar extends JPanel {
         buttonStatWin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                textArea.setText(statistics.getAllWins().toString());
+                try {
+                    textArea.setText(statistics.getAllWins().toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         buttonStatLoss.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                textArea.setText(statistics.getAllLosses().toString());
+                try {
+                    textArea.setText(statistics.getAllLosses().toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         buttonStatYear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                textArea.setText(statistics.getForYear().toString());
+                try {
+                    textArea.setText(statistics.getForYear().toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         buttonStatMonth.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                textArea.setText(statistics.getForMonth().toString());
+                try {
+                    textArea.setText(statistics.getForMonth().toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         buttonStatDay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                textArea.setText(statistics.getForDay().toString());
+                try {
+                    textArea.setText(statistics.getForDay().toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 

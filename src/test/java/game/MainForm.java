@@ -2,6 +2,8 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class MainForm extends JFrame {
     private Player playerO;
     private Board board;
 
-    public MainForm() {
+    public MainForm() throws IOException, SQLException {
         super("Game");
 
         Statistics statistics = Statistics.getInstance();
@@ -45,7 +47,7 @@ public class MainForm extends JFrame {
         Player playerX = new Human("Ivan", Player.X);
         Player playerO = new Human("Anton", Player.O);
         Board board = new Board(playerX, playerO);
-        List<JButton> buttonList = new ArrayList<>();
+        List<JButton> buttonList = new ArrayList<JButton>();
 
         Toolbar toolbar = new Toolbar(board, statistics, label);
         toolbar.setButtons(buttonList);
