@@ -80,11 +80,11 @@ public class GridForm extends JPanel {
 
     private static void addNewStatistics(Board board, Statistics statistics) {
         if (board.getWinner() == null) {
-            statistics.addResult(new GameResult(board.getCurrentPlayer(), GameResult.DRAW));
-            statistics.addResult(new GameResult(board.getAnotherPlayer(board.getCurrentPlayer()), GameResult.DRAW));
+            statistics.addResult(new GameResult(board.getCurrentPlayer(), GameResult.DRAW), Statistics.LOAD);
+            statistics.addResult(new GameResult(board.getAnotherPlayer(board.getCurrentPlayer()), GameResult.DRAW), Statistics.LOAD);
         } else {
-            statistics.addResult(new GameResult(board.getWinner(), GameResult.WIN));
-            statistics.addResult(new GameResult(board.getLoser(), GameResult.LOSS));
+            statistics.addResult(new GameResult(board.getWinner(), GameResult.WIN), Statistics.LOAD);
+            statistics.addResult(new GameResult(board.getLoser(), GameResult.LOSS), Statistics.LOAD);
         }
     }
 }

@@ -1,18 +1,20 @@
 package game;
 
-import java.io.IOException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 public class Statistics {
 
     private List<GameResult> results = new ArrayList<GameResult>();
     private static Statistics instance;
-    private DB db = new DB();
+    private DB db = DB.getInstance();
+    public final static boolean LOAD = true;
+
 
     private Statistics() {
+    }
+
+    private Statistics(boolean load) {
         try {
             this.results.addAll(db.getStatistics());
         } catch (SQLException e) {
@@ -22,11 +24,15 @@ public class Statistics {
 
     public static Statistics getInstance() {
         if (instance == null)
-            instance = new Statistics();
+            instance = new Statistics(LOAD);
         return instance;
     }
 
     public void addResult(GameResult result) {
+        this.results.add(result);
+    }
+
+    public void addResult(GameResult result, boolean upload) {
         this.results.add(result);
         try {
             this.db.addStatistics(result);

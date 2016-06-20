@@ -9,8 +9,9 @@ import java.util.Properties;
 
 public class DB {
     private Connection connection;
+    private static DB instance;
 
-    public DB() {
+    private DB() {
         try {
             isConnect();
         } catch (IOException e) {
@@ -18,6 +19,12 @@ public class DB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static DB getInstance() {
+        if (instance == null)
+            instance = new DB();
+        return instance;
     }
 
     private Properties loadProperties() throws IOException{
@@ -47,9 +54,9 @@ public class DB {
         ResultSet resultSet = statement.getResultSet();
 
         while (resultSet.next()) {
-            Player player = new Human(resultSet.getString("firstname"),
+            Player player = new Human(resultSet.getString("lastname"),
+                    resultSet.getString("firstname"),
                     resultSet.getString("middlename"),
-                    resultSet.getString("lastname"),
                     resultSet.getInt("age"),
                     resultSet.getString("type").charAt(0));
             GameResult result = new GameResult(player, resultSet.getString("result"));
