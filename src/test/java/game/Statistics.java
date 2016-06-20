@@ -1,13 +1,17 @@
 package game;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Statistics {
 
     private List<GameResult> results = new ArrayList<GameResult>();
     private static Statistics instance;
+    private DB db;
 
     private Statistics() {
+        this.db = new DB();
     }
 
     public static Statistics getInstance() {
@@ -18,6 +22,14 @@ public class Statistics {
 
     public void addResult(GameResult result) {
         this.results.add(result);
+        try {
+            this.db.isConnect();
+            this.db.addStatistics(result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Statistics getAllWins() {

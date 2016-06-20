@@ -45,7 +45,7 @@ public class MainForm extends JFrame {
         Player playerX = new Human("Ivan", Player.X);
         Player playerO = new Human("Anton", Player.O);
         Board board = new Board(playerX, playerO);
-        List<JButton> buttonList = new ArrayList<>();
+        List<JButton> buttonList = new ArrayList<JButton>();
 
         Toolbar toolbar = new Toolbar(board, statistics, label);
         toolbar.setButtons(buttonList);

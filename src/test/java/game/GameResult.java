@@ -32,6 +32,10 @@ public class GameResult implements Comparable{
         return date.equals(that.date);
     }
 
+    public Player getPlayer() {
+        return  this.player;
+    }
+
     public String getResult() {
         return this.result;
     }

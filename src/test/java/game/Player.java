@@ -49,6 +49,22 @@ public abstract class Player implements Comparable {
         return type;
     }
 
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     public void setType(char type) {
         this.type = type;
     }
