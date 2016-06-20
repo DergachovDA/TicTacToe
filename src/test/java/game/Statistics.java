@@ -8,10 +8,9 @@ public class Statistics {
 
     private List<GameResult> results = new ArrayList<GameResult>();
     private static Statistics instance;
-    private DB db;
+    private DB db = new DB();
 
     private Statistics() {
-        this.db = new DB();
     }
 
     public static Statistics getInstance() {

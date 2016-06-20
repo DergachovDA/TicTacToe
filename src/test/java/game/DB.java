@@ -6,6 +6,7 @@ import java.util.Properties;
 
 public class DB {
     private Connection connection;
+    private Properties properties;
 
     public DB() {
     }
@@ -18,7 +19,7 @@ public class DB {
     }
 
     public boolean isConnect() throws IOException, SQLException {
-        Properties properties = loadProperties();
+        this.properties = loadProperties();
         this.connection = DriverManager.
                 getConnection(properties.getProperty("url"),
                 properties.getProperty("username"),
