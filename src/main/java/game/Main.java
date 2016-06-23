@@ -53,11 +53,11 @@ public class Main {
 
     private static void addNewStatistics(Board board, Statistics statistics) {
         if (board.getWinner() == null) {
-            statistics.addResult(new GameResult(board.getCurrentPlayer(), GameResult.DRAW));
-            statistics.addResult(new GameResult(board.getAnotherPlayer(board.getCurrentPlayer()), GameResult.DRAW));
+            statistics.addResult(new GameResult(board.getCurrentPlayer(), Result.DRAW));
+            statistics.addResult(new GameResult(board.getAnotherPlayer(board.getCurrentPlayer()), Result.DRAW));
         } else {
-            statistics.addResult(new GameResult(board.getWinner(), GameResult.WIN));
-            statistics.addResult(new GameResult(board.getLoser(), GameResult.LOSS));
+            statistics.addResult(new GameResult(board.getWinner(), Result.WIN));
+            statistics.addResult(new GameResult(board.getLoser(), Result.LOSS));
         }
     }
 

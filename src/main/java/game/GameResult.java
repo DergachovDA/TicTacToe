@@ -6,18 +6,18 @@ import java.util.Date;
 
 public class GameResult implements Comparable{
 
-    public static final String WIN = "win";
-    public static final String LOSS = "loss";
-    public static final String DRAW = "draw";
+//    public static final String WIN = "win";
+//    public static final String LOSS = "loss";
+//    public static final String DRAW = "draw";
 
     private Player player;
-    private String result;
+    private Result result;
     private Date date;
 
     public GameResult() {
     }
 
-    public GameResult(Player player, String result) {
+    public GameResult(Player player, Result result) {
         this.player = player;
         this.result = result;
         this.date = new Date();
@@ -39,7 +39,7 @@ public class GameResult implements Comparable{
         return  this.player;
     }
 
-    public String getResult() {
+    public Result getResult() {
         return this.result;
     }
 
@@ -48,22 +48,22 @@ public class GameResult implements Comparable{
     }
 
     public boolean equalsWin() {
-        return result.equals(WIN);
+        return result.equals(Result.WIN);
     }
 
     public boolean equalsLoss() {
-        return result.equals(LOSS);
+        return result.equals(Result.LOSS);
     }
 
     public boolean equalsDraw() {
-        return result.equals(DRAW);
+        return result.equals(Result.DRAW);
     }
 
     public void setPlayer(Player player) {
         this.player = player;
     }
 
-    public void setResult(String result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 

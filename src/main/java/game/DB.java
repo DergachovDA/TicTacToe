@@ -59,7 +59,7 @@ public class DB {
                     resultSet.getString("middlename"),
                     resultSet.getInt("age"),
                     resultSet.getString("type").charAt(0));
-            GameResult result = new GameResult(player, resultSet.getString("result"));
+            GameResult result = new GameResult(player, Result.isValue(resultSet.getString("result")));
             result.setDate(resultSet.getLong("date"));
 
             results.add(result);
@@ -78,7 +78,7 @@ public class DB {
         preparedStatement.setString(3, result.getPlayer().getMiddlename());
         preparedStatement.setInt(4, result.getPlayer().getAge());
         preparedStatement.setString(5, String.valueOf(result.getPlayer().getType()));
-        preparedStatement.setString(6, result.getResult());
+        preparedStatement.setString(6, result.getResult().getResultValue());
         preparedStatement.setLong(7, result.getDate().getTime());
 
         preparedStatement.execute();

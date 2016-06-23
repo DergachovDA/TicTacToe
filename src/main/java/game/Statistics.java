@@ -44,7 +44,7 @@ public class Statistics {
     public Statistics getAllWins() {
         Statistics allWins = new Statistics();
         for (GameResult result : results) {
-            if (result.getResult().equals(GameResult.WIN)) {
+            if (result.getResult().equals(Result.WIN)) {
                 allWins.addResult(result);
             }
         }
@@ -54,7 +54,7 @@ public class Statistics {
     public Statistics getAllLosses() {
         Statistics allLosses = new Statistics();
         for (GameResult result : results) {
-            if (result.getResult().equals(GameResult.LOSS)) {
+            if (result.getResult().equals(Result.LOSS)) {
                 allLosses.addResult(result);
             }
         }
